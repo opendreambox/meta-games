@@ -1,0 +1,32 @@
+From ec3f0903c3e6a8213702a3f79bb17bf51c914ed4 Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Thu, 9 Feb 2017 19:50:32 +0100
+Subject: [PATCH] use pkgconfig
+
+---
+ configure | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure b/configure
+index 7eaf54a..fb6740a 100755
+--- a/configure
++++ b/configure
+@@ -3362,12 +3362,12 @@ append_var MODULES "backends/platform/$_backend"
+ case $_backend in
+ 	androidsdl | dingux | gph | linuxmoto | maemo | openpandora | samsungtv | sdl)
+ 		find_sdlconfig
+-		append_var INCLUDES "`$_sdlconfig --prefix="$_sdlpath" --cflags`"
+-		append_var LIBS "`$_sdlconfig --prefix="$_sdlpath" --libs`"
++		append_var INCLUDES "`pkg-config --cflags sdl`"
++		append_var LIBS "`pkg-config --libs sdl`"
+ 		append_var DEFINES "-DSDL_BACKEND"
+ 		add_line_to_config_mk "SDL_BACKEND = 1"
+ 
+-		_sdlversion=`$_sdlconfig --version`
++		_sdlversion=`pkg-config --modversion`
+ 		case $_sdlversion in
+ 			2.0.*)
+ 				add_line_to_config_mk "USE_SDL2 = 1"
+-- 
+2.7.4
+
