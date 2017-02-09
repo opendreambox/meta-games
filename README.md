@@ -1,13 +1,19 @@
-meta-emanuel (OE2.5)
+meta-games
 ------------
-openembedded meta-layer for dreambox (dm820/dm7080)
+openembedded meta-layer for dreamboxes with games
 
 
 Enigma2 Game Emulators:
 -----------------------
-advancemame  dosbox  gnuboy  scummvm  snes  stella  vice
-
-recipes-devtools:
------------------------
-php7 phpredis python-*
+* advancemame
+* dgen
+* dosbox
+* fbzx
+* gngeo
+* gnuboy
+* pcsx_rearmed
+* scummvm
+* snes9x
+* stella
+* vice
 
