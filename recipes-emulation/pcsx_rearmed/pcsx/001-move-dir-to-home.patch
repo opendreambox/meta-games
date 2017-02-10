@@ -1,0 +1,193 @@
+diff -Nur pcsx/frontend/main.c pcsx.new/frontend/main.c
+--- pcsx/frontend/main.c	2016-09-30 12:58:12.000000000 +0200
++++ pcsx.new/frontend/main.c	2017-02-10 21:29:39.316359443 +0100
+@@ -57,9 +57,9 @@
+ static void make_path(char *buf, size_t size, const char *dir, const char *fname)
+ {
+ 	if (fname)
+-		snprintf(buf, size, ".%s%s", dir, fname);
++		snprintf(buf, size, "%s%s", dir, fname);
+ 	else
+-		snprintf(buf, size, ".%s", dir);
++		snprintf(buf, size, "%s", dir);
+ }
+ #define MAKE_PATH(buf, dir, fname) \
+ 	make_path(buf, sizeof(buf), dir, fname)
+@@ -103,10 +103,10 @@
+ static void set_default_paths(void)
+ {
+ #ifndef NO_FRONTEND
+-	snprintf(Config.PatchesDir, sizeof(Config.PatchesDir), "." PATCHES_DIR);
++	snprintf(Config.PatchesDir, sizeof(Config.PatchesDir), PATCHES_DIR);
+ 	MAKE_PATH(Config.Mcd1, MEMCARD_DIR, "card1.mcd");
+ 	MAKE_PATH(Config.Mcd2, MEMCARD_DIR, "card2.mcd");
+-	strcpy(Config.BiosDir, "bios");
++	strcpy(Config.BiosDir, "/root/.pcsx/bios");
+ #endif
+ 
+ 	strcpy(Config.PluginsDir, "plugins");
+@@ -240,7 +240,7 @@
+ 
+ 			scrbuf = pl_prepare_screenshot(&w, &h, &bpp);
+ 			get_gameid_filename(buf, sizeof(buf),
+-				"screenshots/%.32s-%.9s.%d.png", ti);
++				"/root/.pcsx/screenshots/%.32s-%.9s.%d.png", ti);
+ 			ret = -1;
+ 			if (scrbuf != 0 && bpp == 16)
+ 				ret = writepng(buf, scrbuf, w, h);
+@@ -477,7 +477,7 @@
+ 	create_profile_dir(CHEATS_DIR);
+ 	create_profile_dir(PATCHES_DIR);
+ 	create_profile_dir(PCSX_DOT_DIR "cfg");
+-	create_profile_dir("/screenshots/");
++	create_profile_dir("/root/.pcsx/screenshots/");
+ }
+ 
+ static void check_memcards(void)
+@@ -487,7 +487,7 @@
+ 	int i;
+ 
+ 	for (i = 1; i <= 9; i++) {
+-		snprintf(buf, sizeof(buf), ".%scard%d.mcd", MEMCARD_DIR, i);
++		snprintf(buf, sizeof(buf), "%scard%d.mcd", MEMCARD_DIR, i);
+ 
+ 		f = fopen(buf, "rb");
+ 		if (f == NULL) {
+@@ -590,7 +590,7 @@
+ 		// FIXME: this recovery doesn't work, just delete bad config and bail out
+ 		// SysMessage("could not load plugins, retrying with defaults\n");
+ 		set_default_paths();
+-		snprintf(path, sizeof(path), "." PCSX_DOT_DIR "%s", cfgfile_basename);
++		snprintf(path, sizeof(path), PCSX_DOT_DIR "%s", cfgfile_basename);
+ 		remove(path);
+ 		SysMessage("Failed loading plugins!");
+ 		return 1;
+@@ -747,7 +747,7 @@
+ 
+ int get_state_filename(char *buf, int size, int i) {
+ 	return get_gameid_filename(buf, size,
+-		"." STATES_DIR "%.32s-%.9s.%3.3d", i);
++		STATES_DIR "%.32s-%.9s.%3.3d", i);
+ }
+ 
+ int emu_check_state(int slot)
+@@ -870,7 +870,7 @@
+ 		char path[MAXPATHLEN];
+ 		char dotdir[MAXPATHLEN];
+ 
+-		MAKE_PATH(dotdir, "/.pcsx/plugins/", NULL);
++		MAKE_PATH(dotdir, "/root/.pcsx/plugins/", NULL);
+ 
+ 		strcpy(info.EmuName, "PCSX");
+ 		strncpy(info.CdromID, CdromId, 9);
+diff -Nur pcsx/frontend/main.h pcsx.new/frontend/main.h
+--- pcsx/frontend/main.h	2016-09-30 12:58:12.000000000 +0200
++++ pcsx.new/frontend/main.h	2017-02-10 21:18:57.380383297 +0100
+@@ -21,16 +21,16 @@
+ 
+ #include "config.h"
+ 
+-#define DEFAULT_MEM_CARD_1 "/.pcsx/memcards/card1.mcd"
+-#define DEFAULT_MEM_CARD_2 "/.pcsx/memcards/card2.mcd"
+-#define MEMCARD_DIR "/.pcsx/memcards/"
+-#define PLUGINS_DIR "/.pcsx/plugins/"
+-#define PLUGINS_CFG_DIR "/.pcsx/plugins/cfg/"
+-#define PCSX_DOT_DIR "/.pcsx/"
+-#define STATES_DIR "/.pcsx/sstates/"
+-#define CHEATS_DIR "/.pcsx/cheats/"
+-#define PATCHES_DIR "/.pcsx/patches/"
+-#define BIOS_DIR "/bios/"
++#define DEFAULT_MEM_CARD_1 "/root/.pcsx/memcards/card1.mcd"
++#define DEFAULT_MEM_CARD_2 "/root/.pcsx/memcards/card2.mcd"
++#define MEMCARD_DIR "/root/.pcsx/memcards/"
++#define PLUGINS_DIR "/root/.pcsx/plugins/"
++#define PLUGINS_CFG_DIR "/root/.pcsx/plugins/cfg/"
++#define PCSX_DOT_DIR "/root/.pcsx/"
++#define STATES_DIR "/root/.pcsx/sstates/"
++#define CHEATS_DIR "/root/.pcsx/cheats/"
++#define PATCHES_DIR "/root/.pcsx/patches/"
++#define BIOS_DIR "/root/.pcsx/bios/"
+ 
+ extern char cfgfile_basename[MAXPATHLEN];
+ 
+diff -Nur pcsx/frontend/menu.c pcsx.new/frontend/menu.c
+--- pcsx/frontend/menu.c	2016-09-30 12:58:12.000000000 +0200
++++ pcsx.new/frontend/menu.c	2017-02-10 21:34:06.668349508 +0100
+@@ -116,7 +116,7 @@
+ static int bios_sel, gpu_plugsel, spu_plugsel;
+ 
+ #ifndef UI_FEATURES_H
+-#define MENU_BIOS_PATH "bios/"
++#define MENU_BIOS_PATH "/root/.pcsx/bios/"
+ #define MENU_SHOW_VARSCALER 0
+ #define MENU_SHOW_VOUTMODE 1
+ #define MENU_SHOW_SCALER2 0
+@@ -472,9 +472,9 @@
+ static void make_cfg_fname(char *buf, size_t size, int is_game)
+ {
+ 	if (is_game)
+-		snprintf(buf, size, "." PCSX_DOT_DIR "cfg/%.32s-%.9s.cfg", get_cd_label(), CdromId);
++		snprintf(buf, size, PCSX_DOT_DIR "cfg/%.32s-%.9s.cfg", get_cd_label(), CdromId);
+ 	else
+-		snprintf(buf, size, "." PCSX_DOT_DIR "%s", cfgfile_basename);
++		snprintf(buf, size, PCSX_DOT_DIR "%s", cfgfile_basename);
+ }
+ 
+ static void keys_write_all(FILE *f);
+@@ -531,7 +531,7 @@
+ 	FILE *f;
+ 	int i, ret = -1;
+ 
+-	snprintf(path, sizeof(path), "." PCSX_DOT_DIR "lastcdimg.txt");
++	snprintf(path, sizeof(path), PCSX_DOT_DIR "lastcdimg.txt");
+ 	f = fopen(path, is_get ? "r" : "w");
+ 	if (f == NULL) {
+ 		ret = -1;
+@@ -688,14 +688,14 @@
+ 		if (memcard1_sel == 0)
+ 			strcpy(Config.Mcd1, "none");
+ 		else if (memcards[memcard1_sel] != NULL)
+-			snprintf(Config.Mcd1, sizeof(Config.Mcd1), ".%s%s",
++			snprintf(Config.Mcd1, sizeof(Config.Mcd1), "%s%s",
+ 				MEMCARD_DIR, memcards[memcard1_sel]);
+ 	}
+ 	if ((unsigned int)memcard2_sel < ARRAY_SIZE(memcards)) {
+ 		if (memcard2_sel == 0)
+ 			strcpy(Config.Mcd2, "none");
+ 		else if (memcards[memcard2_sel] != NULL)
+-			snprintf(Config.Mcd2, sizeof(Config.Mcd2), ".%s%s",
++			snprintf(Config.Mcd2, sizeof(Config.Mcd2), "%s%s",
+ 				MEMCARD_DIR, memcards[memcard2_sel]);
+ 	}
+ 	if (strcmp(mcd1_old, Config.Mcd1) || strcmp(mcd2_old, Config.Mcd2))
+@@ -1755,10 +1755,10 @@
+ {
+ 	strcpy(Config.Mcd1, "none");
+ 	if (memcard1_sel != 0)
+-		snprintf(Config.Mcd1, sizeof(Config.Mcd1), ".%s%s", MEMCARD_DIR, memcards[memcard1_sel]);
++		snprintf(Config.Mcd1, sizeof(Config.Mcd1), "%s%s", MEMCARD_DIR, memcards[memcard1_sel]);
+ 	strcpy(Config.Mcd2, "none");
+ 	if (memcard2_sel != 0)
+-		snprintf(Config.Mcd2, sizeof(Config.Mcd2), ".%s%s", MEMCARD_DIR, memcards[memcard2_sel]);
++		snprintf(Config.Mcd2, sizeof(Config.Mcd2), "%s%s", MEMCARD_DIR, memcards[memcard2_sel]);
+ 	LoadMcds(Config.Mcd1, Config.Mcd2);
+ 	draw_mc_bg();
+ }
+@@ -2438,7 +2438,7 @@
+ 	closedir(dir);
+ 
+ do_memcards:
+-	dir = opendir("." MEMCARD_DIR);
++	dir = opendir(MEMCARD_DIR);
+ 	if (dir == NULL) {
+ 		perror("scan_bios_plugins memcards opendir");
+ 		return;
+@@ -2458,7 +2458,7 @@
+ 		if (ent->d_type != DT_REG && ent->d_type != DT_LNK)
+ 			continue;
+ 
+-		snprintf(fname, sizeof(fname), "." MEMCARD_DIR "%s", ent->d_name);
++		snprintf(fname, sizeof(fname), MEMCARD_DIR "%s", ent->d_name);
+ 		if (stat(fname, &st) != 0) {
+ 			printf("bad memcard file: %s\n", ent->d_name);
+ 			continue;
