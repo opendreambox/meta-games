@@ -1,6 +1,6 @@
 --- git/configure	2017-02-10 22:19:01.000000000 +0100
-+++ git.new/configure	2017-02-09 20:38:56.000000000 +0100
-@@ -3358,8 +3358,8 @@
++++ git.new/configure	2017-02-10 22:37:30.256208165 +0100
+@@ -3358,12 +3358,12 @@
  case $_backend in
  	androidsdl | dingux | gph | linuxmoto | maemo | openpandora | samsungtv | sdl)
  		find_sdlconfig
@@ -11,6 +11,11 @@
  		append_var DEFINES "-DSDL_BACKEND"
  		add_line_to_config_mk "SDL_BACKEND = 1"
  
+-		_sdlversion=`$_sdlconfig --version`
++		_sdlversion=`pkg-config sdl --modversion`
+ 		case $_sdlversion in
+ 			2.0.*)
+ 				add_line_to_config_mk "USE_SDL2 = 1"
 @@ -4441,8 +4441,8 @@
  	if test -z "$_freetypeconfig"; then
  		_freetype2=no
