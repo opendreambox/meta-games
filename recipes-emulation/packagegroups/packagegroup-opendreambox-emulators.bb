@@ -15,7 +15,9 @@ RRECOMMENDS_${PN} += " \
     dgen \
     dosbox \
     fbzx \
+    gngeo \
     gnuboy \
+    pcsx \
     scummvm \
     snes9x-sdl \
     stella \
