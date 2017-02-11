@@ -1,7 +1,7 @@
 SUMMARY = "Retro Gaming with Emulators for dreamboxes"
 LICENSE = "CLOSED"
 GITHUB_PROJECT = "enigma2-plugin-retrogamestation"
-RDEPENDS = "enigma2"
+RDEPENDS_${PN} = "enigma2"
 
 SRCREV = "${@opendreambox_srcrev('c11fda3f48ec528caa1526be0232587c1dca1f46', d)}"
 
