@@ -11,6 +11,7 @@ inherit packagegroup
 RDEPENDS_${PN} += ""
 
 RRECOMMENDS_${PN} += " \
+    enigma2-plugin-extensions-retrogamestation \
     advancemame \
     dgen \
     dosbox \
