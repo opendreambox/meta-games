@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 GITHUB_PROJECT = "enigma2-plugin-retrogamestation"
 RDEPENDS_${PN} = "enigma2"
 
-SRCREV = "${@opendreambox_srcrev('c11fda3f48ec528caa1526be0232587c1dca1f46', d)}"
+SRCREV = "${@opendreambox_srcrev('56a40daac02d0aee10527b3a2668f6b2ecc8e1cd', d)}"
 
 inherit autotools pkgconfig opendreambox-github
 
