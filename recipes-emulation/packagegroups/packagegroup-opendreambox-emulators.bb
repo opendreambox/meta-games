@@ -13,6 +13,7 @@ RDEPENDS_${PN} += ""
 RRECOMMENDS_${PN} += " \
     enigma2-plugin-extensions-retrogamestation \
     advancemame \
+    crispy-doom \
     dgen \
     dosbox \
     fbzx \

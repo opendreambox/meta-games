@@ -1,0 +1,56 @@
+From 3eca28fa77cd9beb3df876c7c57960e29056d0e0 Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Mon, 13 Feb 2017 12:27:37 +0100
+Subject: [PATCH] fix build and drop surface options
+
+---
+ configure.ac  | 2 +-
+ src/i_video.c | 5 ++---
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 8bfe377..b2ad6c9 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -31,7 +31,7 @@ fi
+ 
+ dnl Search for SDL ...
+ 
+-AM_PATH_SDL(1.1.3)
++PKG_CHECK_MODULES(SDL, sdl >= 1.1.3)
+ 
+ # Add the SDL compiler flags to the default compiler flag variables. 
+ # It is important to do this now, before checking for headers and
+diff --git a/src/i_video.c b/src/i_video.c
+index e454aed..aee98fd 100644
+--- a/src/i_video.c
++++ b/src/i_video.c
+@@ -182,7 +182,7 @@ int screen_height = SCREENHEIGHT;
+ 
+ // Color depth.
+ 
+-int screen_bpp = 0;
++int screen_bpp = 16;
+ 
+ // Automatically adjust video settings if the selected mode is 
+ // not a valid video mode.
+@@ -990,7 +990,6 @@ void I_FinishUpdate (void)
+ 
+         SDL_BlitSurface(screenbuffer, NULL, screen, &dst_rect);
+     }
+-
+     SDL_Flip(screen);
+ 
+     // Restore background and undo the disk indicator, if it was drawn.
+@@ -1745,7 +1744,7 @@ static void SetVideoMode(screen_mode_t *mode, int w, int h)
+ 
+     // Set the video mode.
+ 
+-    flags |= SDL_SWSURFACE | SDL_DOUBLEBUF;
++//    flags |= SDL_HWSURFACE | SDLDOUBLEBUF;
+ 
+     if (screen_bpp == 8)
+     {
+-- 
+2.7.4
+
