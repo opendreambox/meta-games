@@ -1,7 +1,8 @@
 PR = "r5"
 
-SRC_URI += "file://bcmfb.patch \
-          "
+SRC_URI += "\
+    file://bcmfb.patch \
+"
 
 EXTRA_OECONF = "--disable-static --enable-cdrom --enable-threads --enable-timers --enable-endian \
                 --enable-file --disable-oss --disable-esd --disable-arts \
