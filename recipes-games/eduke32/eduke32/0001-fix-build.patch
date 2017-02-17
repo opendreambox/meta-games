@@ -1,0 +1,58 @@
+Index: Common.mak
+===================================================================
+--- Common.mak	(revision 6061)
++++ Common.mak	(working copy)
+@@ -7,24 +7,7 @@
+ 
+ # Tools
+ CROSS=
+-ifneq ($(CROSS),)
+-    undefine CC
+-    undefine CXX
+-    undefine AR
+-    undefine RC
+-    undefine RANLIB
+-    undefine STRIP
+-endif
+ 
+-CC=$(CROSS)gcc
+-CXX=$(CROSS)g++
+-AR=$(CROSS)ar
+-RC=$(CROSS)windres
+-RANLIB=$(CROSS)ranlib
+-STRIP=$(CROSS)strip
+-AS=nasm
+-PKG_CONFIG=pkg-config
+-
+ NULLSTREAM = /dev/null
+ DONT_PRINT = > $(NULLSTREAM) 2>&1
+ DONT_PRINT_STDERR = 2> $(NULLSTREAM)
+@@ -854,7 +837,7 @@
+         SDLNAME ?= SDL2
+     endif
+     ifeq ($(SDL_TARGET),1)
+-        SDLCONFIG ?= sdl-config
++        SDLCONFIG ?= pkg-config
+         SDLNAME ?= SDL
+         ifeq (0,$(RELEASE))
+             COMPILERFLAGS += -DNOSDLPARACHUTE
+@@ -862,7 +845,7 @@
+     endif
+ 
+     ifneq ($(strip $(SDLCONFIG)),)
+-        ifeq ($(strip $(shell $(SDLCONFIG) --version $(DONT_PRINT_STDERR))),)
++        ifeq ($(strip $(shell $(SDLCONFIG) --version sdl)),)
+             override SDLCONFIG =
+         endif
+     endif
+@@ -884,8 +867,8 @@
+             LIBS += -l$(SDLNAME)_mixer
+         endif
+         ifneq ($(SDLCONFIG),)
+-            SDLCONFIG_CFLAGS := $(strip $(subst -Dmain=SDL_main,,$(shell $(SDLCONFIG) --cflags)))
+-            SDLCONFIG_LIBS := $(strip $(subst -mwindows,,$(shell $(SDLCONFIG) --libs)))
++            SDLCONFIG_CFLAGS := $(strip $(subst -Dmain=SDL_main,,$(shell $(SDLCONFIG) --cflags sdl)))
++            SDLCONFIG_LIBS := $(strip $(subst -mwindows,,$(shell $(SDLCONFIG) --libs sdl)))
+ 
+             COMMONFLAGS += $(SDLCONFIG_CFLAGS)
+             LIBS += $(SDLCONFIG_LIBS)
