@@ -1,0 +1,37 @@
+diff --git a/configure.ac b/configure.ac
+index ce2635d..93d20c7 100755
+--- a/configure.ac
++++ b/configure.ac
+@@ -2305,7 +2305,6 @@ if test x"$FFMPEG_DO_SUBDIRS" = "xyes"; then
+   else
+       ac_configure_args="$ac_configure_args --enable-yasm-command=${YASM} --enable-make-command=${MAKE-make} --enable-full-host=${ac_cv_host} --enable-compiler=${CC} --prefix=${prefix}"
+   fi
+-  AC_CONFIG_SUBDIRS(src/lib/ffmpeg)
+ fi
+ 
+ if test x"$HAVE_SHARED_FFMPEG" = "xyes"; then
+@@ -2595,9 +2594,9 @@ if test x"$with_sdlsound" = "xyes" -o x"$enable_sdlui" = "xyes" -o x"$enable_sdl
+             LIBS="$LIBS -lSDL"
+         else
+             if test x"$sdl_config" != "xno"; then
+-                CFLAGS="$CFLAGS `$sdl_config --cflags`"
+-                CXXFLAGS="$CXXFLAGS `$sdl_config --cflags`"
+-                LIBS="$LIBS `$sdl_config --libs`"
++                CFLAGS="$CFLAGS `pkg-config --cflags sdl`"
++                CXXFLAGS="$CXXFLAGS `pkg-config --cflags sdl`"
++                LIBS="$LIBS `pkg-config --libs sdl`"
+             else
+                 CFLAGS="$CFLAGS `$sdl2_config --cflags`"
+                 CXXFLAGS="$CXXFLAGS `$sdl2_config --cflags`"
+diff --git a/src/Makefile.am b/src/Makefile.am
+index c8ca59e..7160968 100755
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -626,7 +626,6 @@ infocontrib.h:	$(top_srcdir)/doc/vice.texi $(srcdir)/infocontrib.sed
+ 	$(SHELL) $(srcdir)/geninfocontrib_h.sh indexhtml <index.tmp >../doc/html/index.html
+ 	rm -f index.tmp
+ 	cp $(top_srcdir)/src/arch/os2/dialogs/dialogs.rc ./dialogs.tmp
+-	$(SHELL) $(srcdir)/geninfocontrib_h.sh os2dialogs <dialogs.tmp >arch/os2/dialogs/dialogs.rc
+ 	rm -f dialogs.tmp
+ 	$(SHELL) $(srcdir)/geninfocontrib_h.sh vice1 | $(srcdir)/sedinfocontrib_h.sh $(srcdir)/infocontrib.sed >../man/vice.1
+ 	rm -f team.tmp

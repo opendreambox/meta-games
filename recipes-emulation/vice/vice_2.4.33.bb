@@ -1,5 +1,3 @@
-SUMMARY = "VICE (SDL), the multi-platform C64, C128, VIC20, PET, PLUS4 and CBM-II emulator"
- 
 MAINTAINER = "Andreas Boose <viceteam@t-online.de> \
 Dag Lem <resid@nimrod.no> \
 Tibor Biczo <crown@mail.matav.hu> \
@@ -33,57 +31,43 @@ Kajtar Zsolt <soci@c64.rulez.org> \
 Benjamin 'BeRo' Rosseaux <benjamin@rosseaux.com> \
 Gemini Team <info@ihad.tv>"
 
+SUMMARY = "VICE (SDL), the multi-platform C64, C128, VIC20, PET, PLUS4 and CBM-II emulator"
 HOMEPAGE = "http://vice-emu.sourceforge.net/"
 SECTION = "emulators"
-PRIORITY = "optional"
-
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
-
-DEPENDS = "virtual/libsdl \
-	libjpeg-turbo \
-	zlib \
-	giflib \
-	libpng \
+DEPENDS = " \
+        virtual/libsdl \
+        libjpeg-turbo \
+        libav \
+        libvorbis \
+        flac \
+        readline \
+        zlib \
+        giflib \
+        libpng \
+        mpg123 \
 "
+PRIORITY = "optional"
 
-PV = "2.4.20"
-PR = "r1"
-PN = "vice"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/vice-emu/${PN}-${PV}.tar.gz \
-	file://pkg-sdl.patch \
+SRC_URI = " \
+        ${SOURCEFORGE_MIRROR}/vice-emu/${BPN}-${PV}.tar.gz \
+        file://fix-build.patch \
 "
-
-SRC_URI[md5sum] = "91e083f83b491753923c44a69f0b1839"
-SRC_URI[sha256sum] = "e5d3d125940f0fafe409aabeec9de4e3ae8d9c19a731aa7ec6a57f6d2b897c5f"
-
-inherit autotools-brokensep
+SRC_URI[md5sum] = "e4dd02494c38610718df9f4d4566a0c7"
+SRC_URI[sha256sum] = "111bb26310bd660802767084f6840a75156158134689a23a3c8a0e0d817ee36d"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-do_configure() {
-./configure  --build=x86_64-linux \
-		--host=mipsel-oe-linux \
-		--target=mipsel-oe-linux \
-		--prefix=/usr \
-		--exec_prefix=/usr \
-		--bindir=/usr/bin \
-		--sbindir=/usr/sbin \
-		--libexecdir=/usr/lib/vice \
-		--datadir=/usr/share \
-		--sysconfdir=/etc \
-		--sharedstatedir=/com \
-		--localstatedir=/var \
-		--libdir=/usr/lib \
-		--includedir=/usr/include \
-		--oldincludedir=/usr/include \
-		--infodir=/usr/share/info \
-		--mandir=/usr/share/man \
-		--enable-sdlui \
-		--without-pulse \
-		--with-sdlsound \
-		--with-uithreads \
-		--enable-arch=sdl \
-		--disable-lame
-}
+inherit autotools-brokensep
+
+EXTRA_OECONF = " \
+        --disable-lame \
+        --disable-option-checking \
+        --enable-arch=sdl \
+        --enable-external-ffmpeg \
+        --enable-sdlui \
+        --with-sdlsound \
+        --with-uithreads \
+        --without-pulse \
+"
