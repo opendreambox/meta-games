@@ -810,7 +810,7 @@ index 0000000..c254c9c
 +				}
 +			}
 +		}
-+		if(type==3)
++		if((type==3) || (type==7))
 +		{
 +			if (SDL_strncmp(name, "dreambox front panel", 20) == 0)
 +			{
