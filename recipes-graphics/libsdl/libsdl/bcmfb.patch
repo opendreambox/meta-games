@@ -1518,10 +1518,10 @@ index 0000000..fbb031d
 +/* Functions to be exported */
 diff --git a/src/video/bcmfb/SDL_fbvideo.c b/src/video/bcmfb/SDL_fbvideo.c
 new file mode 100644
-index 0000000..311782d
+index 0000000..4b69f07
 --- /dev/null
 +++ b/src/video/bcmfb/SDL_fbvideo.c
-@@ -0,0 +1,1785 @@
+@@ -0,0 +1,1797 @@
 +/* bcmfb based SDL video driver implementation.
 +*  SDL - Simple DirectMedia Layer
 +*  Copyright (C) 1997-2012 Sam Lantinga
@@ -1901,11 +1901,12 @@ index 0000000..311782d
 +
 +	mode_okay = 0;
 +	vinfo->bits_per_pixel = (index+1)*8;
-+	vinfo->xres = *w;
-+	vinfo->xres_virtual = *w;
-+	vinfo->yres = *h;
-+	vinfo->yres_virtual = *h;
++	vinfo->height = 0;
++	vinfo->width = 0;
++	vinfo->xres = vinfo->xres_virtual = *w;
++	vinfo->yres = vinfo->yres_virtual = *h;
 +	vinfo->activate = FB_ACTIVATE_TEST;
++	vinfo->xoffset = vinfo->yoffset = 0;
 +	switch(vinfo->bits_per_pixel) {
 +		case 32:
 +			vinfo->transp.offset = 0;
@@ -1927,15 +1928,26 @@ index 0000000..311782d
 +			vinfo->blue.offset = 16;
 +			vinfo->blue.length = 8;
 +			break;
-+		case 8:
-+			vinfo->transp.offset = 0;
++		case 16:
++			vinfo->red.offset = 0;
++			vinfo->red.length = 5;
++			vinfo->green.offset = 5;
++			vinfo->green.length = 6;
++			vinfo->blue.offset = 11;
++			vinfo->blue.length = 5;
++			vinfo->transp.offset = 16;
 +			vinfo->transp.length = 0;
++			break;
++		case 8:
 +			vinfo->red.offset = 0;
 +			vinfo->red.length = 3;
 +			vinfo->green.offset = 3;
 +			vinfo->green.length = 3;
 +			vinfo->blue.offset = 4;
 +			vinfo->blue.length = 2;
++			vinfo->transp.offset = 8;
++			vinfo->transp.length = 0;
++			break;
 +	}
 +	if ( ioctl(console_fd, FBIOPUT_VSCREENINFO, vinfo) == 0 ) {
 +#ifdef BCMFB_DEBUG
@@ -2393,13 +2405,6 @@ index 0000000..311782d
 +		while ( read_bcmfb_conf_mode(modesdb, &cinfo) ) {
 +			if ( (vinfo->xres == cinfo.xres && vinfo->yres == cinfo.yres) &&
 +			     (!matched || (vinfo->bits_per_pixel == cinfo.bits_per_pixel)) ) {
-+				vinfo->pixclock = cinfo.pixclock;
-+				vinfo->left_margin = cinfo.left_margin;
-+				vinfo->right_margin = cinfo.right_margin;
-+				vinfo->upper_margin = cinfo.upper_margin;
-+				vinfo->lower_margin = cinfo.lower_margin;
-+				vinfo->hsync_len = cinfo.hsync_len;
-+				vinfo->vsync_len = cinfo.vsync_len;
 +				if ( matched ) {
 +					break;
 +				}
@@ -2472,14 +2477,10 @@ index 0000000..311782d
 +		vinfo.activate = FB_ACTIVATE_NOW;
 +		vinfo.accel_flags = 0;
 +		vinfo.bits_per_pixel = bpp;
-+		vinfo.xres = width;
-+		vinfo.xres_virtual = width;
-+		vinfo.yres = height;
-+		if ( flags & SDL_DOUBLEBUF ) {
-+			vinfo.yres_virtual = height*2;
-+		} else {
-+			vinfo.yres_virtual = height;
-+		}
++		vinfo.xres = vinfo.xres_virtual = width;
++		vinfo.yres = vinfo.yres_virtual = height;
++		vinfo.width = 0;
++		vinfo.height = 0;
 +		vinfo.xoffset = 0;
 +		vinfo.yoffset = 0;
 +		switch(vinfo.bits_per_pixel) {
@@ -2503,15 +2504,26 @@ index 0000000..311782d
 +				vinfo.blue.offset = 16;
 +				vinfo.blue.length = 8;
 +				break;
-+			case 8:
-+				vinfo.transp.offset = 0;
++			case 16:
++				vinfo.red.offset = 11;
++				vinfo.red.length = 5;
++				vinfo.green.offset = 5;
++				vinfo.green.length = 6;
++				vinfo.blue.offset = 0;
++				vinfo.blue.length = 5;
++				vinfo.transp.offset = 16;
 +				vinfo.transp.length = 0;
++				break;
++			case 8:
 +				vinfo.red.offset = 0;
 +				vinfo.red.length = 3;
 +				vinfo.green.offset = 3;
 +				vinfo.green.length = 3;
 +				vinfo.blue.offset = 4;
 +				vinfo.blue.length = 2;
++				vinfo.transp.offset = 8;
++				vinfo.transp.length = 0;
++				break;
 +		}
 +		if ( ! choose_bcmfb_conf_mode(&vinfo) ) {
 +			choose_bcmfb_mode(&vinfo);
