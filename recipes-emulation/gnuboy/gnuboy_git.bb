@@ -8,6 +8,9 @@ PRIORITY = "optional"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 LICENSE = "GPLv2"
 
+PE = "1"
+PV = "1.0.5"
+
 DEPENDS = " \
     virtual/libsdl \
     zlib \
