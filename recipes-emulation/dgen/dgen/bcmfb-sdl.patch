@@ -1,6 +1,18 @@
---- git.new/sdl/sdl.cpp	2017-02-02 19:40:34.900239142 +0100
-+++ git/sdl/sdl.cpp	2017-02-02 00:06:33.905659582 +0100
-@@ -3811,7 +3811,7 @@
+diff --git a/sdl/sdl.cpp b/sdl/sdl.cpp
+index 8a76e76..b91d040 100644
+--- a/sdl/sdl.cpp
++++ b/sdl/sdl.cpp
+@@ -3440,8 +3440,7 @@ static void mdscr_splash()
+ static int screen_init(unsigned int width, unsigned int height)
+ {
+ 	static bool once = true;
+-	uint32_t flags = (SDL_RESIZABLE | SDL_ANYFORMAT | SDL_HWPALETTE |
+-			  SDL_HWSURFACE);
++	uint32_t flags = (SDL_RESIZABLE | SDL_HWPALETTE );
+ 	struct screen scrtmp;
+ 	const struct dgen_font *font;
+ 
+@@ -3811,7 +3810,7 @@ int pd_graphics_init(int want_sound, int want_pal, int hz)
  		// [fbcon workaround]
  		// Double buffering usually makes screen blink during refresh.
  		if ((SDL_VideoDriverName(buf, sizeof(buf))) &&

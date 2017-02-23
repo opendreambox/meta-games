@@ -13,20 +13,15 @@ SRC_URI = " \
 "
 
 SRCREV = "a6f61a594b996840110a6c4bc0347a9d8e4f81e7"
-PV = "1.33+git${SRCPV}"
-PR = "r0"
+PV = "1.33"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep pkgconfig git-project
 
-DEPENDS = "libsdl \
+DEPENDS = " \
+	libsdl \
 	libarchive \
-	"
-
-S = "${WORKDIR}/git"
+"
 
 FILES_${PN} += "/usr/bin"
 
-do_configure() {
-	${S}/autogen.sh
-	oe_runconf --enable-threads --disable-asm
-}
+EXTRA_OECONF = " --enable-threads --disable-asm "
