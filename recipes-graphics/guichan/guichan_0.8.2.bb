@@ -13,6 +13,10 @@ SRCREV = "fc9e3a0f76fbab229af457f0f113159425c27fcf"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "libsdl libsdl-gfx"
+DEPENDS = " \
+    libsdl \
+    libsdl-gfx \
+    libsdl-image \
+"
 
 inherit autotools pkgconfig
