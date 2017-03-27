@@ -14,7 +14,7 @@ SRC_URI = " \
 
 SRCREV = "25e52b2c51afd3609aa2a0e218036d27520af510"
 PV = "1.9+git${SRCPV}"
-PR = "r1"
+PR = "r2"
 
 inherit autotools-brokensep pkgconfig
 
@@ -30,8 +30,8 @@ FILES_${PN} += "/usr/games/ /usr/games/plugins/"
 do_configure() {
 	git submodule init && git submodule update
 	CFLAGS="${TUNE_CCARGS}"
-	./configure
-	sed -i -e 's/SDL_HWSURFACE | SDL_DOUBLEBUF/SDL_RESIZABLE | SDL_SWSURFACE/' ${S}/frontend/libpicofe/plat_sdl.c
+	sed -i -e 's:"$have_gles" = "yes":"$have_gles" = "no":g' ${S}/configure
+	./configure --gpu=unai
 	sed -i -e 's:/.picodrive/:/.pcsx/.picodrive/:' ${S}/frontend/libpicofe/linux/plat.c
 }
 
