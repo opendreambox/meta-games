@@ -16,7 +16,7 @@ DEPENDS = " \
     zlib \
 "
 
-SRCREV = "${@opendreambox_srcrev('1a4b6693b1438fbc90778d42a9db709844e2ff91', d)}"
+SRCREV = "${@opendreambox_srcrev('7afb7771c18457bc0a30fdfad9a74bf992fc457d', d)}"
 
 inherit autotools-brokensep pkgconfig opendreambox-github
 
