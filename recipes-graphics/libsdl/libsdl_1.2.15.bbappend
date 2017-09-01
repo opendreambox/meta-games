@@ -16,4 +16,4 @@ inherit opendreambox-srcrev git-project
 
 PV = "1.2.15"
 RECIPE_PR := "${PR}"
-PR = "${RECIPE_PR}-dream1"
+PR = "${RECIPE_PR}-dream2"
