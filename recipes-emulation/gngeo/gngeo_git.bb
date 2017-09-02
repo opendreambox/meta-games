@@ -33,4 +33,4 @@ do_configure() {
 	oe_runconf
 }
 
-PARALLEL_MAKE_dm7080 = ""
+PARALLEL_MAKE = ""
