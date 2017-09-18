@@ -48,12 +48,12 @@ do_install() {
 	install -m 0755 ${S}/advmame ${D}${bindir}/advmame
 	install -m 0755 ${S}/advmenu ${D}${bindir}/advmenu
 	install -m 0755 ${S}/advmess ${D}${bindir}/advmess
-#	install -m 0755 ${S}/advcfg ${D}${bindir}/advcfg
-#	install -m 0755 ${S}/advv ${D}${bindir}/advv
-#	install -m 0755 ${S}/advs ${D}${bindir}/advs
-#	install -m 0755 ${S}/advj ${D}${bindir}/advj
-#	install -m 0755 ${S}/advk ${D}${bindir}/advk
-#	install -m 0755 ${S}/advm ${D}${bindir}/advm
+	install -m 0755 ${S}/advcfg ${D}${bindir}/advcfg
+	install -m 0755 ${S}/advv ${D}${bindir}/advv
+	install -m 0755 ${S}/advs ${D}${bindir}/advs
+	install -m 0755 ${S}/advj ${D}${bindir}/advj
+	install -m 0755 ${S}/advk ${D}${bindir}/advk
+	install -m 0755 ${S}/advm ${D}${bindir}/advm
 	
 	install -d ${D}/${datadir}/advance/
 	install -d ${D}/${datadir}/advance/sample
@@ -72,33 +72,4 @@ FILES_${PN} += " \
     ${datadir}/advance/* \
     /usr/bin/* \
 "
-
-pkg_postinst_${PN} () {
-#! /bin/sh
-set -e
-
-if [ x"$D" = "x" ]; then
-	# On target
-	if [ -f /root/.advance/advmame.rc ]; then
-		DATE=`date +"%Y%m%d%H%M"`
-		cp -a /root/.advance/advmame.rc /root/.advance/advmame.rc.$DATE
-	fi
-	/usr/bin/advmame --default
-	
-	if [ -f /root/.advance/advmenu.rc ]; then
-		DATE=`date +"%Y%m%d%H%M"`
-		cp -a /root/.advance/advmenu.rc /root/.advance/advmenu.rc.$DATE
-	fi
-	/usr/bin/advmenu --default
-	
-	if [ -f /root/.advance/advmess.rc ]; then
-		DATE=`date +"%Y%m%d%H%M"`
-		cp -a /root/.advance/advmess.rc /root/.advance/advmess.rc.$DATE
-	fi
-	/usr/bin/advmess --default
-else
-    exit 0
-fi
-
-}
 
