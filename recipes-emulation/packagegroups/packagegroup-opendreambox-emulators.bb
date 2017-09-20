@@ -19,9 +19,11 @@ RRECOMMENDS_${PN} += " \
     fbzx \
     gngeo \
     gnuboy \
-    pcsx \
     scummvm \
     snes9x-sdl \
     stella \
     vice \
+"
+RRECOMMENDS_${PN}_arm_append = " \
+    pcsx \
 "

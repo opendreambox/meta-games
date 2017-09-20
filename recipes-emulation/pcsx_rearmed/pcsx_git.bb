@@ -3,36 +3,41 @@ SECTION = "emulators"
 PRIORITY = "optional"
 HOMEPAGE="https://github.com/notaz/pcsx_rearmed"
 AUTHOR = "GeminiTeam"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5dd99a4a14d516c44d0779c1e819f963"
-
-SRC_URI = " \
-	git://github.com/notaz/pcsx_rearmed.git;branch=master \
-	file://001-move-dir-to-home.patch \
-	file://pkg-config_sdl.patch \
-"
-
-SRCREV = "25e52b2c51afd3609aa2a0e218036d27520af510"
-PV = "1.9+git${SRCPV}"
-PR = "r2"
-
-inherit autotools-brokensep pkgconfig
-
-DEPENDS = "libsdl \
+DEPENDS = " \
+	libsdl \
 	zlib \
 	libpng \
-	"
+"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5dd99a4a14d516c44d0779c1e819f963"
+GITHUB_ORGANIZATION = "notaz"
+GITHUB_PROJECT = "pcsx_rearmed"
 
-S = "${WORKDIR}/git"
+COMPATIBLE_MACHINE = "^(dm900)$"
+SRCREV = "${@opendreambox_srcrev('25e52b2c51afd3609aa2a0e218036d27520af510', d)}"
+PV = "1.9"
 
-FILES_${PN} += "/usr/games/ /usr/games/plugins/"
+inherit opendreambox-github autotools-brokensep pkgconfig
 
-do_configure() {
+SRC_URI += " \
+	file://0001-move-homedir.patch \
+	file://0002-fix-configure.patch \
+"
+
+FILES_${PN} += " \
+	/usr/games/ \
+	/usr/games/plugins/ \
+"
+
+EXTRA_OECONF += " \
+	--gpu=neon \
+	--enable-neon \
+	--sound-drivers=alsa sdl \
+"
+
+do_configure_prepend() {
 	git submodule init && git submodule update
 	CFLAGS="${TUNE_CCARGS}"
-	sed -i -e 's:"$have_gles" = "yes":"$have_gles" = "no":g' ${S}/configure
-	./configure --gpu=unai
-	sed -i -e 's:/.picodrive/:/.pcsx/.picodrive/:' ${S}/frontend/libpicofe/linux/plat.c
 }
 
 do_install() {
