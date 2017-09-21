@@ -1,0 +1,32 @@
+From 1f027851428bb22c03ae7ed68b336bef7b0f2b3a Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Mon, 18 Sep 2017 12:35:34 +0200
+Subject: [PATCH] add dreambox platform
+
+---
+ Makefile.libretro | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index fb13657..ad47d12 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -221,6 +221,15 @@ else ifeq ($(platform), rpi3)
+ 	BUILTIN_GPU = neon
+ 	USE_DYNAREC = 1
+ 
++# Dreambox - Flags are set by openembedded
++else ifeq ($(platform), dreambox)
++	TARGET := $(TARGET_NAME)_libretro.so
++	fpic := -fPIC
++	HAVE_NEON = 1
++	ARCH = arm
++	BUILTIN_GPU = neon
++	USE_DYNAREC = 1
++
+ # ARM
+ else ifneq (,$(findstring armv,$(platform)))
+ 	TARGET := $(TARGET_NAME)_libretro.so
+-- 
+2.7.4
+

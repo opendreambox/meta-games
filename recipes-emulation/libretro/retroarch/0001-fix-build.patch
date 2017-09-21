@@ -1,0 +1,136 @@
+From 612510c3dafb8561cad068577e155f0fadd12b11 Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Sat, 16 Sep 2017 15:57:36 +0200
+Subject: [PATCH] fix build
+
+---
+ Makefile.common |  2 +-
+ qb/qb.comp.sh   |  9 ++++-----
+ qb/qb.libs.sh   | 10 +++++-----
+ qb/qb.params.sh |  4 ++--
+ 4 files changed, 12 insertions(+), 13 deletions(-)
+
+diff --git a/Makefile.common b/Makefile.common
+index 698187e..e23c31d 100644
+--- a/Makefile.common
++++ b/Makefile.common
+@@ -1117,7 +1117,7 @@ ifeq ($(HAVE_SDL2), 1)
+    endif
+ 
+    DEFINES += $(SDL2_CFLAGS) $(BSD_LOCAL_INC)
+-   LIBS += $(SDL2_LIBS)
++   LIBS += $(SDL2_LIBS) -lEGL
+    HAVE_SDL = 0
+ endif
+ 
+diff --git a/qb/qb.comp.sh b/qb/qb.comp.sh
+index fe97bdb..20be37c 100644
+--- a/qb/qb.comp.sh
++++ b/qb/qb.comp.sh
+@@ -12,10 +12,10 @@ EOF
+ 
+ cc_works=0
+ if [ "$CC" ]; then
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" >/dev/null 2>&1 && cc_works=1
++	$CC -o "$TEMP_EXE" "$TEMP_C" >/dev/null 2>&1 && cc_works=1
+ else
+ 	for CC in ${CC:=$(which ${CROSS_COMPILE}gcc ${CROSS_COMPILE}cc ${CROSS_COMPILE}clang 2>/dev/null)} ''; do
+-		"$CC" -o "$TEMP_EXE" "$TEMP_C" >/dev/null 2>&1 && cc_works=1 && break
++		$CC -o "$TEMP_EXE" "$TEMP_C" >/dev/null 2>&1 && cc_works=1 && break
+ 	done
+ fi
+ 
+@@ -75,7 +75,7 @@ if [ "$OS" = "Win32" ]; then
+ 	echo "$echobuf ... $WINDRES"
+ fi
+ 
+-[ -n "$PKG_CONF_PATH" ] || {
++[ -n $PKG_CONF_PATH ] || {
+ 	PKG_CONF_PATH="none"
+ 
+ 	for path in $(which "${CROSS_COMPILE}pkg-config" 2>/dev/null) ''; do
+@@ -84,9 +84,8 @@ fi
+ 			break;
+ 		}
+ 	done
+-
+ }
+-
++export PKG_CONF_PATH="pkg-config"
+ echo "Checking for pkg-config ... $PKG_CONF_PATH"
+ 
+ if [ "$PKG_CONF_PATH" = "none" ]; then
+diff --git a/qb/qb.libs.sh b/qb/qb.libs.sh
+index 573b982..2afef9c 100644
+--- a/qb/qb.libs.sh
++++ b/qb/qb.libs.sh
+@@ -36,7 +36,7 @@ check_lib()	#$1 = HAVE_$1	$2 = lib	$3 = function in lib	$4 = extralibs $5 = head
+ 	fi
+ 	answer='no'
+ #	echo -n "$ECHOBUF"
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS $LIBRARY_DIRS $4 $CFLAGS $LDFLAGS $2 >>config.log 2>&1 && answer='yes'
++	$CC -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS $LIBRARY_DIRS $4 $CFLAGS $LDFLAGS $2 >>config.log 2>&1 && answer='yes'
+ 	eval HAVE_$1="$answer"; echo "$ECHOBUF ... $answer"
+ 	rm "$TEMP_C" "$TEMP_EXE" >/dev/null 2>&1
+ 	
+@@ -83,7 +83,7 @@ check_code_c()
+ 	ECHOBUF="Checking C code snippet \"$3\""
+ #	echo -n "Checking C code snippet \"$3\""
+ 	answer='no'
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS $LIBRARY_DIRS $2 $CFLAGS $LDFLAGS >>config.log 2>&1 && answer='yes'
++	$CC -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS $LIBRARY_DIRS $2 $CFLAGS $LDFLAGS >>config.log 2>&1 && answer='yes'
+ 	eval HAVE_$1="$answer"; echo "$ECHOBUF ... $answer"
+ 	rm "$TEMP_C" "$TEMP_EXE" >/dev/null 2>&1
+ }
+@@ -145,7 +145,7 @@ check_header()	#$1 = HAVE_$1	$2..$5 = header files
+ 	[ "$5" != "" ] && CHECKHEADER="$5" && echo "#include <$5>" >> "$TEMP_C"
+ 	echo "int main(void) { return 0; }" >> "$TEMP_C"
+ 	answer='no'
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS >>config.log 2>&1 && answer='yes'
++	$CC -o "$TEMP_EXE" "$TEMP_C" $INCLUDE_DIRS >>config.log 2>&1 && answer='yes'
+ 	eval HAVE_$1="$answer"; echo "Checking presence of header file $CHECKHEADER ... $answer"
+ 	rm "$TEMP_C" "$TEMP_EXE" >/dev/null 2>&1
+ 	[ "$tmpval" = 'yes' ] && [ "$answer" = 'no' ] && {
+@@ -166,7 +166,7 @@ check_macro()	#$1 = HAVE_$1	$2 = macro name
+ int main(void) { return 0; }
+ EOF
+ 	answer='no'
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" $CFLAGS $INCLUDE_DIRS >>config.log 2>&1 && answer='yes'
++	$CC -o "$TEMP_EXE" "$TEMP_C" $CFLAGS $INCLUDE_DIRS >>config.log 2>&1 && answer='yes'
+ 	eval HAVE_$1="$answer"; echo "$ECHOBUF ... $answer"
+ 	rm "$TEMP_C" "$TEMP_EXE" >/dev/null 2>&1
+ 	[ "$tmpval" = 'yes' ] && [ "$answer" = 'no' ] && {
+@@ -180,7 +180,7 @@ check_switch_c()	#$1 = HAVE_$1	$2 = switch	$3 = critical error message [checked
+ #	echo -n "Checking for availability of switch $2 in $CC "
+ 	echo "int main(void) { return 0; }" > $TEMP_C
+ 	answer='no'
+-	"$CC" -o "$TEMP_EXE" "$TEMP_C" $2 >>config.log 2>&1 && answer='yes'
++	$CC -o "$TEMP_EXE" "$TEMP_C" $2 >>config.log 2>&1 && answer='yes'
+ 	eval HAVE_$1="$answer"; echo "$ECHOBUF ... $answer"
+ 	rm "$TEMP_C" "$TEMP_EXE" >/dev/null 2>&1
+ 	[ "$answer" = 'no' ] && {
+diff --git a/qb/qb.params.sh b/qb/qb.params.sh
+index 4b82229..7980c5f 100644
+--- a/qb/qb.params.sh
++++ b/qb/qb.params.sh
+@@ -52,7 +52,7 @@ EOF
+ opt_exists() # $opt is returned if exists in OPTS
+ {	opt=$(echo "$1" | tr '[a-z]' '[A-Z]')
+ 	for OPT in $OPTS; do [ "$opt" = "$OPT" ] && return; done
+-	echo "Unknown option $2"; exit 1
++	echo "Unknown option $2"; #exit 1
+ }
+ 
+ parse_input() # Parse stuff :V
+@@ -81,7 +81,7 @@ parse_input() # Parse stuff :V
+ 				eval "$opt=\"$val\""
+ 			;;
+ 			-h|--help) print_help; exit 0;;
+-			*) echo "Unknown option $1"; exit 1;;
++			*) echo "Unknown option $1";; # exit 1;;
+ 		esac
+ 		shift
+ 	done
+-- 
+2.7.4
+

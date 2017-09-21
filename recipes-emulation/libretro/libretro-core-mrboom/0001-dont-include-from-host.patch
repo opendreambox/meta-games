@@ -1,0 +1,25 @@
+From ba7fc21aee03a6087c4ed553196a94d7cd761627 Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Wed, 20 Sep 2017 06:42:29 +0200
+Subject: [PATCH] dont include from host
+
+---
+ Makefile.common | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.common b/Makefile.common
+index 09c9a13..f4d02a2 100644
+--- a/Makefile.common
++++ b/Makefile.common
+@@ -2,7 +2,7 @@ LIBRETRO_COMM_DIR := $(CORE_DIR)/libretro-common
+ AI_DIR		:= $(CORE_DIR)/ai
+ SOURCES_C := 	$(CORE_DIR)/mrboom.c
+ 
+-INCFLAGS          := -I$(LIBRETRO_COMM_DIR)/include -I$(AI_DIR) -I$(CORE_DIR) -I/usr/local/include
++INCFLAGS          := -I$(LIBRETRO_COMM_DIR)/include -I$(AI_DIR) -I$(CORE_DIR)
+ 
+ SOURCES_CXX :=	$(CORE_DIR)/common.cpp \
+                 $(AI_DIR)/BotTree.cpp \
+-- 
+2.7.4
+

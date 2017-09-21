@@ -1,0 +1,35 @@
+From 14dfdddfbd9ba5ab87038d3cee4855445bfb3c9a Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Tue, 19 Sep 2017 16:32:02 +0200
+Subject: [PATCH] add dreambox platform
+
+---
+ Makefile | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index 58c3e3a..1e9df9a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -89,6 +89,18 @@ else ifneq (,$(findstring rpi,$(platform)))
+       HAVE_NEON = 1
+    endif
+ 
++# Dreambox
++else ifneq (,$(findstring dreambox,$(platform)))
++   real_platform = linux
++   TARGET := $(TARGET_NAME)_libretro.so
++   LDFLAGS += -shared -Wl,--version-script=$(LIBRETRO_DIR)/link.T -Wl,--no-undefined
++   GL_LIB := -lGLESv2
++   GLES = 1
++   WITH_DYNAREC = arm
++   HAVE_NEON = 1
++   FORCE_GLES = 1
++   HAVE_OPENGLES2 = 1
++
+ # ODROIDs
+ else ifneq (,$(findstring odroid,$(platform)))
+    TARGET := $(TARGET_NAME)_libretro.so
+-- 
+2.7.4
+
