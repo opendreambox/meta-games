@@ -1,0 +1,36 @@
+From 98007eebbdac98e0217dc15112023a99f2718275 Mon Sep 17 00:00:00 2001
+From: Stephan Reichholf <reichi@opendreambox.org>
+Date: Thu, 21 Sep 2017 15:38:28 +0200
+Subject: [PATCH] add dreambox platform
+
+---
+ Makefile.libretro | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 9b7978d..afa062f 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -39,12 +39,18 @@ ifeq ($(platform), android)
+    PLATFLAGS := -DAND -DALIGN_DWORD
+ 
+ else ifeq ($(platform), unix)
+-   CC = gcc
++   CC := gcc
+  TARGET := $(TARGET_NAME)_libretro.so
+    fpic := -fPIC
+    SHARED :=  -shared -Wl,--version-script=$(CORE_DIR)/libretro/core/link.T -Wl,--no-undefined
+    PLATFLAGS := -DALIGN_DWORD
+ 
++else ifeq ($(platform), dreambox)
++   TARGET := $(TARGET_NAME)_libretro.so
++   fpic := -fPIC
++   SHARED :=  -shared -Wl,--version-script=$(CORE_DIR)/libretro/core/link.T -Wl,--no-undefined
++   PLATFLAGS := -DALIGN_DWORD
++
+ # OS X
+ else ifneq (,$(findstring osx,$(platform)))
+    TARGET := $(TARGET_NAME)_libretro.dylib
+-- 
+2.7.4
+

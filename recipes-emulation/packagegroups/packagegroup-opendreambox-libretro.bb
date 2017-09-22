@@ -21,6 +21,7 @@ RRECOMMENDS_${PN}_append = " \
     libretro-core-snes9x2010 \
     libretro-core-vba-next \
     libretro-core-vice-x64 \
+    libretro-core-xrick \
 "
 RRECOMMENDS_${PN}_arm = " \
     libretro-core-mupen64plus \
