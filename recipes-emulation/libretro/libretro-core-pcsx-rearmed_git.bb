@@ -14,6 +14,6 @@ SRC_URI += " \
     file://0001-add-dreambox-platform.patch \
 "
 
-do_compile_prepend() {
-	platform=dreambox
+do_compile() {
+	platform=dreambox oe_runmake -f Makefile.libretro
 }
