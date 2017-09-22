@@ -7,7 +7,7 @@ SRC_URI = " \
         file://linkage.patch \
 "
 
-SRCREV = "${@opendreambox_srcrev('e5c71d4525c515fb45b63467189fd8bc277bde6b', d)}"
+SRCREV = "${@opendreambox_srcrev('f5cefb91963eadc36cc4005859b1e95906fa2696', d)}"
 
 PV = "2.0.5"
 
