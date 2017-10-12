@@ -19,7 +19,7 @@ DEPENDS = "libsdl2 \
 	"
 
 SRC_URI = " \
-        git://github.com/opendreambox/SDL-mirror.git;protocol=https;branch=${BRANCH};tag=${SRCREV} \
+        git://github.com/opendreambox/SDL-mirror.git;protocol=https;branch=${BRANCH} \
 "
 PV = "2.0.5"
 RECIPE_PR := "${PR}"
