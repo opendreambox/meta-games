@@ -62,10 +62,20 @@ FILES_${PN}-xmb-systematic = " \
      ${ASSETDIR}/xmb/systematic \
 "
 
-EXTRA_OEMAKE = " \
-    DESTDIR=${D} \
-"
+do_configure() {
+}
 
 do_install() {
-    oe_runmake install
+    mkdir -p ${D}${ASSETDIR}
+    cp -r -t ${D}${ASSETDIR} \
+        branding \
+        glui \
+        wallpapers \
+        xmb
+    rm -rf \
+        ${D}${ASSETDIR}/xmb/NPMApng2PMApng.py \
+        ${D}${ASSETDIR}/xmb/convert.sh \
+        ${D}${ASSETDIR}/xmb/monochrome/src \
+        ${D}${ASSETDIR}/xmb/flatui/src \
+        ${D}${ASSETDIR}/xmb/dot-art/src
 }

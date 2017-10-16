@@ -17,6 +17,9 @@ EXTRA_OEMAKE = " \
     DESTDIR=${D} \
 "
 
+do_configure() {
+}
+
 do_install() {
     oe_runmake install
 }

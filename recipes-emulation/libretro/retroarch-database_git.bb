@@ -1,6 +1,5 @@
 SUMMARY = "Databases for RetroArch"
 LICENSE = "CLOSED"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 GITHUB_ORGANIZATION = "libretro"
 GITHUB_PROJECT = "libretro-database"
 
@@ -26,10 +25,13 @@ FILES_${PN}-cursors = " \
      ${DBDIR}/cursors \
 "
 
-EXTRA_OEMAKE = " \
-    DESTDIR=${D} \
-"
+do_configure() {
+}
 
 do_install() {
-    oe_runmake install
+    mkdir -p ${D}${DBDIR}
+    cp -r -t ${D}${DBDIR} \
+        cht \
+        cursors \
+        rdb
 }
