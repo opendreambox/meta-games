@@ -8,7 +8,7 @@ Subject: [PATCH 2/2] fix configure
  1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/configure b/configure
-index 4d9b566..0d2165d 100755
+index c3ff68f..b795835 100755
 --- a/configure
 +++ b/configure
 @@ -134,7 +134,7 @@ for opt do
@@ -44,10 +44,10 @@ index 4d9b566..0d2165d 100755
    check_sdl || fail "please install libsdl (libsdl1.2-dev)"
  fi
  
-@@ -460,10 +460,10 @@ int main(void) {
- }
- EOF
- if compile_binary $CFLAGS_GLES -lEGL -lGLES_CM $LDLIBS_GLES; then
+@@ -464,10 +464,10 @@ if [ "$VIDEOCORE" = "yes" ] && compile_binary $CFLAGS_GLES -lbrcmEGL -lbrcmGLESv
+   have_gles="yes"
+   LDLIBS_GLES="-lbrcmEGL -lbrcmGLESv2 $LDLIBS_GLES"
+ elif compile_binary $CFLAGS_GLES -lEGL -lGLES_CM $LDLIBS_GLES; then
 -  have_gles="yes"
 +  have_gles="no"
    LDLIBS_GLES="-lEGL -lGLES_CM $LDLIBS_GLES"
