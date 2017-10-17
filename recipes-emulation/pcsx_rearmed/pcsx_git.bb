@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5dd99a4a14d516c44d0779c1e819f963"
 GITHUB_ORGANIZATION = "notaz"
 GITHUB_PROJECT = "pcsx_rearmed"
 
-COMPATIBLE_MACHINE = "^(dm900)$"
+COMPATIBLE_MACHINE = "^(dm900|dm920)$"
 SRCREV = "${@opendreambox_srcrev('25e52b2c51afd3609aa2a0e218036d27520af510', d)}"
 PV = "1.9"
 
