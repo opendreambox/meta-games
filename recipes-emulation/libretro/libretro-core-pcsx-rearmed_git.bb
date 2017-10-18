@@ -7,7 +7,7 @@ LIBRETRO_CORE_NAME = "pcsx_rearmed"
 
 include libretro-core.inc
 
-COMPATIBLE_MACHINE = "^(dm900)$"
+COMPATIBLE_MACHINE = "^(dm900|dm920)$"
 
 SRCREV = "c7dde5efda060c5baf259c6ad39090e1cb1defd6"
 SRC_URI += " \
