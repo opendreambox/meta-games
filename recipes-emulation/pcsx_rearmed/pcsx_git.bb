@@ -14,7 +14,7 @@ GITHUB_ORGANIZATION = "notaz"
 GITHUB_PROJECT = "pcsx_rearmed"
 
 COMPATIBLE_MACHINE = "^(dm900|dm920)$"
-SRCREV = "${@opendreambox_srcrev('25e52b2c51afd3609aa2a0e218036d27520af510', d)}"
+SRCREV = "bebe989ba22f0bac230a0b8a75617ae895ea274f"
 PV = "1.9"
 
 inherit opendreambox-github autotools-brokensep pkgconfig
