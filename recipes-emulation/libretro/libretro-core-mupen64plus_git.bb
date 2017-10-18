@@ -7,7 +7,7 @@ LIBRETRO_CORE_NAME = "mupen64plus"
 
 include libretro-core.inc
 
-COMPATIBLE_MACHINE = "^(dm900)$"
+COMPATIBLE_MACHINE = "^(dm900|dm920)$"
 
 SRCREV = "938277abf18fcc3cc6fa991ba5d26c0aa9996116"
 SRC_URI += " \
