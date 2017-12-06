@@ -2,7 +2,7 @@ SUMMARY = "Assets for RetroArch"
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 GITHUB_ORGANIZATION = "libretro"
-GITHUB_PROJECT = "retroarch-assets"
+GITHUB_PROJECT = "retroarch-assets-old1"
 
 SRCREV = "3acffa41f215adcaa4b675055dbb4c8b19ccb74c"
 

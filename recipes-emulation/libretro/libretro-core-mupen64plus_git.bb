@@ -14,6 +14,8 @@ SRC_URI += " \
     file://0001-add-dreambox-platform.patch \
 "
 
+EXTRA_OEMAKE += " platform=dreambox"
+
 do_compile() {
-	platform=dreambox oe_runmake
+	oe_runmake
 }
