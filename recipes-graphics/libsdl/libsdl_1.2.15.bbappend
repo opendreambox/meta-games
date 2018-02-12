@@ -6,7 +6,7 @@ SRC_URI = " \
         file://pkgconfig.patch \
 "
 
-SRCREV = "${@opendreambox_srcrev('132e1e1984267f316c587957fdd1315c67527ff3', d)}"
+SRCREV = "${@opendreambox_srcrev('c29300c76ca5bca53423659b855f78829a23d5cd', d)}"
 
 EXTRA_OECONF += "\
         --enable-video-bcmfb \
