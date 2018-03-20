@@ -1,6 +1,7 @@
 SUMMARY = "Libretro port of VBA Next"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README.MD;beginline=240;endline=253;md5=078dcb147bbb271edf3e17228ab07233"
+DEPENDS = "flex-native"
 
 GITHUB_PROJECT = "vice-libretro"
 LIBRETRO_CORE_NAME = "vice_x64"
