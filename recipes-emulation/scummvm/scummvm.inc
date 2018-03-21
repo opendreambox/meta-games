@@ -14,8 +14,8 @@ EXTRA_OECONF = "--host=${HOST_SYS} \
 		--prefix=${prefix} \
 		--with-ogg-prefix=${STAGING_LIBDIR}/.. \
 		--with-vorbis-prefix=${STAGING_LIBDIR}/.. \
-		${@base_conditional('ENTERPRISE_DISTRO', '1', '--disable-mpeg2', '--with-mpeg2-prefix=${STAGING_LIBDIR}/..', d)} \
-		${@base_conditional('ENTERPRISE_DISTRO', '1', '--disable-mad', '--with-mad-prefix=${STAGING_LIBDIR}/..', d)} \
+		${@oe.utils.conditional('ENTERPRISE_DISTRO', '1', '--disable-mpeg2', '--with-mpeg2-prefix=${STAGING_LIBDIR}/..', d)} \
+		${@oe.utils.conditional('ENTERPRISE_DISTRO', '1', '--disable-mad', '--with-mad-prefix=${STAGING_LIBDIR}/..', d)} \
 		"
 
 EXTRA_OEMAKE = "MANDIR=${mandir}"
