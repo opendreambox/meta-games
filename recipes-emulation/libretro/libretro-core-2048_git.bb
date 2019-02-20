@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "2048"
 
 include libretro-core.inc
 
-SRCREV = "2012133dbfcbcb62ce3ce5fa2b652011720f9446"
+SRCREV = "bc05dc6e504e78fd4eaf7bf91f5b3f84a93c2962"

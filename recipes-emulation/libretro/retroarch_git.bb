@@ -15,19 +15,20 @@ DEPENDS = " \
     freetype \
     dbus \
     zlib \
+    qtbase \
 "
 RDEPENDS_${PN} = " \
     retroarch-assets-branding \
-    retroarch-assets-xmb-monochrome \
+    retroarch-assets-ozone \
     retroarch-core-info \
     retroarch-database-rdb \
     retroarch-joypad-autoconfig-sdl2 \
     retroarch-joypad-autoconfig-udev \
 "
 
-SRCREV = "8e8bdaaab3dc4686ce39e59da922f79a76ba4496"
+SRCREV = "9750719074041e0f1949cf9535d1e04945f6213b"
 
-PV = "1.6.7"
+PV = "1.7.6"
 
 inherit pkgconfig opendreambox-github
 

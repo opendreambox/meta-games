@@ -1,0 +1,24 @@
+From 950aef97043b2526d30e83d51b4f2e421fd49d3c Mon Sep 17 00:00:00 2001
+From: reichi <stephan@reichholf.net>
+Date: Wed, 20 Feb 2019 11:53:48 +0100
+Subject: [PATCH] fix build
+
+---
+ Makefile | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Makefile b/Makefile
+index fd0e916..c0dde06 100644
+--- a/Makefile
++++ b/Makefile
+@@ -23,6 +23,7 @@ CPPFLAGS := $(filter-out -D_FORTIFY_SOURCE,$(CPPFLAGS))
+ 
+ ifeq ($(platform),)
+ platform = unix
++CFLAGS += -DDONT_WANT_ARM_OPTIMIZATIONS
+ ifeq ($(shell uname -a),)
+    platform = win
+ else ifneq ($(findstring MINGW,$(shell uname -a)),)
+-- 
+2.7.4
+

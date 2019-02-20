@@ -9,7 +9,7 @@ include libretro-core.inc
 
 COMPATIBLE_MACHINE = "^(dm900|dm920)$"
 
-SRCREV = "938277abf18fcc3cc6fa991ba5d26c0aa9996116"
+SRCREV = "563565dea05b6b205cfadfb1bb3b73522938916b"
 SRC_URI += " \
     file://0001-add-dreambox-platform.patch \
 "

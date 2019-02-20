@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "fceumm"
 
 include libretro-core.inc
 
-SRCREV = "e48363078f15fe3b0d8a9693cab934eebf004445"
+SRCREV = "4b9fffa33a8f9eca03ff916aed492752ae5152fe"

@@ -7,9 +7,9 @@ LIBRETRO_CORE_NAME = "mrboom"
 
 include libretro-core.inc
 
-SRCREV = "175151ad106e5d98eb20a39256077e7344cf099d"
+SRCREV = "67b1b65633f67e79e0ff552f4571cbcf0969a535"
 SRC_URI += " \
-    file://0001-dont-include-from-host.patch \
+    file://0001-fix-build.patch \
 "
 
 do_compile() {

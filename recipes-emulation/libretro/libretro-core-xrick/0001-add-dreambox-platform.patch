@@ -1,24 +1,17 @@
-From 98007eebbdac98e0217dc15112023a99f2718275 Mon Sep 17 00:00:00 2001
-From: Stephan Reichholf <reichi@opendreambox.org>
-Date: Thu, 21 Sep 2017 15:38:28 +0200
+From b47800f17e81d35178c28503d02ab0c31141b0ef Mon Sep 17 00:00:00 2001
+From: reichi <stephan@reichholf.net>
+Date: Wed, 20 Feb 2019 11:30:06 +0100
 Subject: [PATCH] add dreambox platform
 
 ---
- Makefile.libretro | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ Makefile.libretro | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
 diff --git a/Makefile.libretro b/Makefile.libretro
-index 9b7978d..afa062f 100644
+index 3f30866..7c6cde3 100644
 --- a/Makefile.libretro
 +++ b/Makefile.libretro
-@@ -39,12 +39,18 @@ ifeq ($(platform), android)
-    PLATFLAGS := -DAND -DALIGN_DWORD
- 
- else ifeq ($(platform), unix)
--   CC = gcc
-+   CC := gcc
-  TARGET := $(TARGET_NAME)_libretro.so
-    fpic := -fPIC
+@@ -45,6 +45,12 @@ else ifeq ($(platform), unix)
     SHARED :=  -shared -Wl,--version-script=$(CORE_DIR)/libretro/core/link.T -Wl,--no-undefined
     PLATFLAGS := -DALIGN_DWORD
  
@@ -28,9 +21,9 @@ index 9b7978d..afa062f 100644
 +   SHARED :=  -shared -Wl,--version-script=$(CORE_DIR)/libretro/core/link.T -Wl,--no-undefined
 +   PLATFLAGS := -DALIGN_DWORD
 +
- # OS X
- else ifneq (,$(findstring osx,$(platform)))
-    TARGET := $(TARGET_NAME)_libretro.dylib
+ # Classic Platforms ####################
+ # Platform affix = classic_<ISA>_<µARCH>
+ # Help at https://modmyclassic.com/comp
 -- 
-2.7.4
+2.17.1
 

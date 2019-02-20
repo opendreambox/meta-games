@@ -7,7 +7,7 @@ LIBRETRO_CORE_NAME = "xrick"
 
 include libretro-core.inc
 
-SRCREV = "6a95f09471b095ca4aa6ebc598e5458a93754434"
+SRCREV = "a083023e89d904c59be2be5559db30fada544a0b"
 SRC_URI += " \
     file://0001-add-dreambox-platform.patch \
 "

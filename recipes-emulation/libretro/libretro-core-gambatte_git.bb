@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "gambatte"
 
 include libretro-core.inc
 
-SRCREV = "ba2c2dc577cfb6a147922fdd1706d1ab82e942f8"
+SRCREV = "ffce1f0e93111bec77b3778273297536fcfb612a"

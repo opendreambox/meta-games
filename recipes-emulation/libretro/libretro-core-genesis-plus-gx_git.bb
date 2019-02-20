@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "genesis_plus_gx"
 
 include libretro-core.inc
 
-SRCREV = "997360b11463c9851858e42aa37ce972cdf76a4d"
+SRCREV = "f5eed5133101999e1f6f04d2240ae77bb891adb9"

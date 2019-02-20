@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "snes9x2010"
 
 include libretro-core.inc
 
-SRCREV = "e3b7fa5544d2df0a91b3593b9a91b06df7ec83a4"
+SRCREV = "d0606eb568d1ec13dd2ca8949ae990b86cfb1034"
