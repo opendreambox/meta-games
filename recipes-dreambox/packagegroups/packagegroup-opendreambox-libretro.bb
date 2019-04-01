@@ -18,7 +18,7 @@ RRECOMMENDS_${PN}_append = " \
     libretro-core-hatari \
     libretro-core-mrboom \
     libretro-core-scummvm \
-    libretro-core-snes9x2010 \
+    libretro-core-snes9x \
     libretro-core-vba-next \
     libretro-core-vice-x64 \
     libretro-core-xrick \
