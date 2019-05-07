@@ -59,7 +59,7 @@ SRC_URI[sha256sum] = "111bb26310bd660802767084f6840a75156158134689a23a3c8a0e0d81
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF = " \
         --disable-lame \
