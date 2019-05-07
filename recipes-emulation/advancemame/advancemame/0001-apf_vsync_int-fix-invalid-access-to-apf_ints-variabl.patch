@@ -1,0 +1,27 @@
+From 33e656f663aa5cbbf7759eef4dae082959958bb1 Mon Sep 17 00:00:00 2001
+From: Andreas Oberritter <obi@opendreambox.org>
+Date: Tue, 7 May 2019 16:52:20 +0200
+Subject: [PATCH] apf_vsync_int: fix invalid access to apf_ints variable
+
+The variable apf_ints is defined as unsigned char. Trying to access it as unsigned int caused the following error:
+
+| obj/mess/linux/blend/apf.a(apf.o): In function `apf_vsync_int':
+| .../mess/vidhrdw/apf.c:30:(.text+0x60): relocation truncated to fit: R_AARCH64_LDST32_ABS_LO12_NC against symbol `apf_ints' defined in COMMON section in obj/mess/linux/blend/apf.a(apf.o)
+| .../mess/vidhrdw/apf.c:30: warning: One possible cause of this error is that the symbol is being referenced in the indicated code as if it had a larger alignment than was declared where it was defined.
+---
+ mess/vidhrdw/apf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mess/vidhrdw/apf.c b/mess/vidhrdw/apf.c
+index b60e5166..8938bd3a 100644
+--- a/mess/vidhrdw/apf.c
++++ b/mess/vidhrdw/apf.c
+@@ -23,7 +23,7 @@ static ATTR_CONST UINT8 apf_get_attributes(UINT8 c)
+ 
+ static void apf_vsync_int(int line)
+ {
+-	extern unsigned int apf_ints;
++	extern unsigned char apf_ints;
+ 	if (line)
+ 		apf_ints |= 0x10;
+ 	else

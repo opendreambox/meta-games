@@ -15,15 +15,13 @@ HOMEPAGE = "http://www.advancemame.it"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
-SRCREV = "0d4333b032ec388aa42b5f034f611556d01d0357"
+SRCREV = "0a22846ccddfbd7a8220614661b546dfbca2b65a"
 
 PN = "advancemame"
-PV = "3.3"
+PV = "3.9"
 
-SRC_URI = " \
-    git://github.com/amadvance/advancemame.git;protocol=https \
-	file://configure.patch \
-"
+SRC_URI = "git://github.com/amadvance/advancemame.git;protocol=https \
+           file://0001-apf_vsync_int-fix-invalid-access-to-apf_ints-variabl.patch"
 
 inherit autotools-brokensep pkgconfig git-project
 
