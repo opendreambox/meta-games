@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/emanuel4you/sdlquake-dreambox.git;protocol=https;bra
 
 FILES_${PN} += "/usr/bin /usr/share"
 
-inherit autotools
+inherit autotools pkgconfig
 
 S = "${WORKDIR}/git"
 
