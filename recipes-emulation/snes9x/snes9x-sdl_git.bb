@@ -25,7 +25,7 @@ S = "${WORKDIR}/git/sdl"
 
 DEPENDS = "virtual/libsdl libpng"
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
 
 #EXTRA_OECONF += "--enable-debug --enable-debugger"
 
