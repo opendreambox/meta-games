@@ -39,7 +39,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 DEPENDS = " \
         virtual/libsdl \
         libjpeg-turbo \
-        libav \
         libvorbis \
         flac \
         readline \
@@ -65,7 +64,6 @@ EXTRA_OECONF = " \
         --disable-lame \
         --disable-option-checking \
         --enable-arch=sdl \
-        --enable-external-ffmpeg \
         --enable-sdlui \
         --with-sdlsound \
         --with-uithreads \
