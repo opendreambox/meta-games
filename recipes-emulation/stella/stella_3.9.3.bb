@@ -23,4 +23,4 @@ DEPENDS = "virtual/libsdl zlib libpng"
 
 FILES_${PN} += "${datadir}/icons"
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
