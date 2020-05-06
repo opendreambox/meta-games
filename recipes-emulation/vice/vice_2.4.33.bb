@@ -46,6 +46,7 @@ DEPENDS = " \
         giflib \
         libpng \
         mpg123 \
+        byacc-native \
 "
 PRIORITY = "optional"
 
