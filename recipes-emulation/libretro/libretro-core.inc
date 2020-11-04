@@ -5,13 +5,15 @@ inherit pkgconfig opendreambox-github
 LIBRETRO_LIBDIR = "${libdir}/libretro/"
 LIBRETRO_CORE_DIR ?= ""
 
+LIBRETRO_CORE_MAKEFILE ?= "Makefile.libretro"
+
 FILES_${PN} = "${LIBRETRO_LIBDIR}${LIBRETRO_CORE_NAME}_libretro.so"
 
 do_configure() {
 }
 
 do_compile() {
-	oe_runmake -f Makefile.libretro
+	oe_runmake -f ${LIBRETRO_CORE_MAKEFILE}
 }
 
 do_install() {

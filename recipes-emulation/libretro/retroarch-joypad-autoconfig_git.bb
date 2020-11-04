@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 GITHUB_ORGANIZATION = "libretro"
 GITHUB_PROJECT = "retroarch-joypad-autoconfig"
 
-SRCREV = "e35ea02c351bb00b49d2f039983da8336e9b66ff"
+SRCREV = "a86d8e79e7663b18331e3c40f94dc87ebd8544ef"
 
 PACKAGES = " \
     ${PN}-hid \

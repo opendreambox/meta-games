@@ -7,8 +7,9 @@ LIBRETRO_CORE_NAME = "mrboom"
 
 include libretro-core.inc
 
-SRCREV = "67b1b65633f67e79e0ff552f4571cbcf0969a535"
-SRC_URI += " \
+SRCREV = "e074bafa1fe9480df1ba412752912a2c2c454958"
+SRC_URI = " \
+    gitsm://github.com/libretro/mrboom-libretro.git;protocol=https \
     file://0001-fix-build.patch \
 "
 

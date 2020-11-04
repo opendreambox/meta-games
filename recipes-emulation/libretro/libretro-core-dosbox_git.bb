@@ -7,5 +7,5 @@ LIBRETRO_CORE_NAME = "dosbox"
 
 include libretro-core.inc
 
-SRCREV = "7216efe33153f028573ad68a843d897bdb11a69c"
+SRCREV = "665d16d4edaeb8b1d6170c4bcf3747d20b03d032"
 

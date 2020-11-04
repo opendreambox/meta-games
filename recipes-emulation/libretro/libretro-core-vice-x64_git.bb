@@ -6,7 +6,9 @@ DEPENDS = "flex-native"
 GITHUB_PROJECT = "vice-libretro"
 LIBRETRO_CORE_NAME = "vice_x64"
 
+LIBRETRO_CORE_MAKEFILE = "Makefile"
+
 include libretro-core.inc
 
-SRCREV = "ce4524df3c4e93e25dd97a6586c24c5e40d30c60"
+SRCREV = "67dbfb1382a867f68205b470a679c506d761b931"
 

@@ -26,14 +26,13 @@ RDEPENDS_${PN} = " \
     retroarch-joypad-autoconfig-udev \
 "
 
-SRCREV = "9750719074041e0f1949cf9535d1e04945f6213b"
+SRCREV = "5e551dd92b79d8127e66939835ea3c2a140c4078"
 
-PV = "1.7.6"
+PV = "1.9.0"
 
 inherit pkgconfig opendreambox-github
 
 SRC_URI += " \
-    file://0001-fix-build.patch \
     file://0002-improve-defaults.patch \
     file://retroarch-core-options.cfg \
 "

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 GITHUB_ORGANIZATION = "libretro"
 GITHUB_PROJECT = "retroarch-assets"
 
-SRCREV = "4eb7ba537a7f6afae77a9767912881a6e8e464c2"
+SRCREV = "133b63e159ed80759f96e7ce9392ffbc4f13e3c2"
 
 inherit opendreambox-github
 

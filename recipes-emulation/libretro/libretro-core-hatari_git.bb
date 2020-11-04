@@ -8,4 +8,4 @@ LIBRETRO_CORE_NAME = "hatari"
 
 include libretro-core.inc
 
-SRCREV = "42388bbdf042824d1d7d3b6db64a6b719c707682"
+SRCREV = "f19bc118b4e39f5b5131505d5ead09109384be8f"

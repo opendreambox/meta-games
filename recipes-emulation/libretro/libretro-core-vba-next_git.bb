@@ -7,4 +7,4 @@ LIBRETRO_CORE_NAME = "vba_next"
 
 include libretro-core.inc
 
-SRCREV = "e40f1d56268416b7d75578b3df2cc6f139a3f097"
+SRCREV = "15037175093511aab9a52e27f28989c6c6fdb674"

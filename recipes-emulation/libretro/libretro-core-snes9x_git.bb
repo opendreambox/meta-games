@@ -13,4 +13,4 @@ do_compile() {
 	oe_runmake
 }
 
-SRCREV = "913b75d07c6e8d54e966e2c4a79d7c55428007df"
+SRCREV = "975aecb88830e6719e267e38144da47eb707fbac"

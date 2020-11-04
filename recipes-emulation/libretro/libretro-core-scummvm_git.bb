@@ -8,7 +8,7 @@ LIBRETRO_CORE_DIR = "backends/platform/libretro/build/"
 
 include libretro-core.inc
 
-SRCREV = "373756e3663bc5aee0c96fe582fd749a8a95c4c9"
+SRCREV = "7b1e9299057a01a1defad6dbae4bdbeed36aa767"
 
 do_compile() {
 	oe_runmake -C ${LIBRETRO_CORE_DIR}

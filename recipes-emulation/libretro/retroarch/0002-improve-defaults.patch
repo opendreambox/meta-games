@@ -69,7 +69,7 @@ index d2f0e5bdec..434eb1c7ed 100644
  # Video refresh rate of your monitor.
  # Used to calculate a suitable audio input rate.
 -# video_refresh_rate = 59.94
-+video_refresh_rate = 30.00
++video_refresh_rate = 50
  
  # Forcibly disable sRGB FBO support. Some Intel OpenGL drivers on Windows
  # have video problems with sRGB FBO support enabled.

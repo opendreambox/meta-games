@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 GITHUB_ORGANIZATION = "libretro"
 GITHUB_PROJECT = "libretro-core-info"
 
-SRCREV = "d285119cd58ec28bb4332eae523ed211399e94d1"
+SRCREV = "f8c1149c628c13be63a6ea605f49f0a94fec1421"
 
 inherit opendreambox-github
 
