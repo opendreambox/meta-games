@@ -1,5 +1,5 @@
 RRECOMMENDS_${PN} += "retroarch"
-GITHUB_ORGANIZATION = "libretro"
+GITHUB_ORGANIZATION ?= "libretro"
 inherit pkgconfig opendreambox-github
 
 LIBRETRO_LIBDIR = "${libdir}/libretro/"
